@@ -41,10 +41,18 @@
 			<version>4.3.8.Final</version>
 		</dependency>
 
+		<!-- Hibernate EntityManager -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.3.8.Final</version>
+		</dependency>
+
+		<!-- Connector Mysql Java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.35</version>
 		</dependency>
 	</dependencies>
 </project>

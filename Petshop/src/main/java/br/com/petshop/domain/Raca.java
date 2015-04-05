@@ -10,20 +10,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="estado")
-public class Estado implements Serializable {
+@Table(name="raca")
+public class Raca implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="est_id", nullable=false)
+	@Column(name="rac_id", nullable=false)
 	private Long codigo;
 	
-	@Column(name="est_nome", nullable=false, length=30)
+	@Column(name="rac_nome", nullable=false, length=20)
 	private String nome;
 	
-	@Column(name="est_sigla", nullable=false, length=2)
-	private String sigla;
+	@Column(name="rac_pedgree", nullable=false, length=1)
+	private String pedgree;
 
 	public Long getCodigo() {
 		return codigo;
@@ -41,12 +41,12 @@ public class Estado implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getSigla() {
-		return sigla;
+	public String getPedgree() {
+		return pedgree;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setPedgree(String pedgree) {
+		this.pedgree = pedgree;
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class Estado implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Estado other = (Estado) obj;
+		Raca other = (Raca) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;

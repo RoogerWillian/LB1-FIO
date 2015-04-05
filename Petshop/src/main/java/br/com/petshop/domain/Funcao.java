@@ -3,27 +3,27 @@ package br.com.petshop.domain;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Entity;
 
 @Entity
-@Table(name="estado")
-public class Estado implements Serializable {
-
+@Table(name="funcao")
+public class Funcao implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="est_id", nullable=false)
+	@Column(name="fun_id", nullable=false)
 	private Long codigo;
 	
-	@Column(name="est_nome", nullable=false, length=30)
-	private String nome;
+	@Column(name="fun_descricao", nullable=false, length=30)
+	private String descricao;
 	
-	@Column(name="est_sigla", nullable=false, length=2)
-	private String sigla;
+	@Column(name="fun_nivel_hierarquico", nullable=false, length=20)
+	private String nivelHierarquico;
 
 	public Long getCodigo() {
 		return codigo;
@@ -33,20 +33,20 @@ public class Estado implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getSigla() {
-		return sigla;
+	public String getNivelHierarquico() {
+		return nivelHierarquico;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setNivelHierarquico(String nivelHierarquico) {
+		this.nivelHierarquico = nivelHierarquico;
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class Estado implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Estado other = (Estado) obj;
+		Funcao other = (Funcao) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
@@ -73,6 +73,4 @@ public class Estado implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 }

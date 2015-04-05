@@ -2,28 +2,37 @@ package br.com.petshop.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="estado")
-public class Estado implements Serializable {
+@Table
+public class Animal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="est_id", nullable=false)
+	@Column(name="ani_id", nullable=false)
 	private Long codigo;
 	
-	@Column(name="est_nome", nullable=false, length=30)
+	@Column(name="ani_nome", nullable=false, length=30)
 	private String nome;
 	
-	@Column(name="est_sigla", nullable=false, length=2)
-	private String sigla;
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
+	@JoinColumn(name="ani_raca", referencedColumnName="rac_id", nullable=false)
+	private Raca raca;
+	
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
+	@JoinColumn(name="ani_dono", referencedColumnName="cli_id", nullable=false)
+	private Cliente dono;
 
 	public Long getCodigo() {
 		return codigo;
@@ -41,12 +50,20 @@ public class Estado implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getSigla() {
-		return sigla;
+	public Raca getRaca() {
+		return raca;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setRaca(Raca raca) {
+		this.raca = raca;
+	}
+
+	public Cliente getDono() {
+		return dono;
+	}
+
+	public void setDono(Cliente dono) {
+		this.dono = dono;
 	}
 
 	@Override
@@ -65,7 +82,7 @@ public class Estado implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Estado other = (Estado) obj;
+		Animal other = (Animal) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
@@ -73,6 +90,4 @@ public class Estado implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 }

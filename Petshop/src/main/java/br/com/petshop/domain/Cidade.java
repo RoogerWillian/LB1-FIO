@@ -2,28 +2,33 @@ package br.com.petshop.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="estado")
-public class Estado implements Serializable {
-
+@Table(name="cidade")
+public class Cidade implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="est_id", nullable=false)
+	@Column(name="cid_id", nullable=false)
 	private Long codigo;
 	
-	@Column(name="est_nome", nullable=false, length=30)
+	@Column(name="cid_nome",nullable=false, length=40)
 	private String nome;
 	
-	@Column(name="est_sigla", nullable=false, length=2)
-	private String sigla;
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="cid_estado", referencedColumnName="est_id", nullable=false)
+	private Estado estado;
 
 	public Long getCodigo() {
 		return codigo;
@@ -41,12 +46,12 @@ public class Estado implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getSigla() {
-		return sigla;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -65,7 +70,7 @@ public class Estado implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Estado other = (Estado) obj;
+		Cidade other = (Cidade) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
@@ -73,6 +78,5 @@ public class Estado implements Serializable {
 			return false;
 		return true;
 	}
-	
 	
 }
